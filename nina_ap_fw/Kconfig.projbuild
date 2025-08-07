@@ -1,0 +1,28 @@
+menu "NINA AP UART settings"
+
+config NINA_UART_PORT
+    int "UART port number"
+    range 0 2
+    default 1
+    help
+        Select UART controller to use for STM32 communication.
+
+config NINA_UART_TX_PIN
+    int "UART TX GPIO"
+    default 17
+    help
+        GPIO number used for UART TX.
+
+config NINA_UART_RX_PIN
+    int "UART RX GPIO"
+    default 16
+    help
+        GPIO number used for UART RX.
+
+config NINA_UART_BAUD
+    int "UART baud rate"
+    default 115200
+    help
+        Baud rate for UART link to STM32.
+
+endmenu
