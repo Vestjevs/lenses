@@ -10,10 +10,16 @@ extern "C" {
 #endif
 
 #define BYTE_STACK_CAPACITY 16
+#define BYTE_STACK_ITEM_CAPACITY 1024
 
 typedef struct {
-    uint8_t data[BYTE_STACK_CAPACITY];
-    size_t top; /* number of elements currently stored */
+    uint8_t bytes[BYTE_STACK_ITEM_CAPACITY];
+    size_t length;
+} ByteStackItem;
+
+typedef struct {
+    ByteStackItem items[BYTE_STACK_CAPACITY];
+    size_t top;
 } ByteStack;
 
 void byte_stack_init(ByteStack* stack);
@@ -21,9 +27,9 @@ void byte_stack_clear(ByteStack* stack);
 bool byte_stack_is_empty(const ByteStack* stack);
 bool byte_stack_is_full(const ByteStack* stack);
 size_t byte_stack_size(const ByteStack* stack);
-bool byte_stack_push(ByteStack* stack, uint8_t value);
-bool byte_stack_pop(ByteStack* stack, uint8_t* out_value);
-bool byte_stack_peek(const ByteStack* stack, uint8_t* out_value);
+bool byte_stack_push(ByteStack* stack, const uint8_t* data, size_t length);
+bool byte_stack_pop(ByteStack* stack, ByteStackItem* out_item);
+bool byte_stack_peek(const ByteStack* stack, ByteStackItem* out_item);
 
 #ifdef __cplusplus
 }
